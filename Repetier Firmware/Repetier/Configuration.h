@@ -39,7 +39,7 @@
 #define NUM_EXTRUDER 1
 
 // 301 = RAMBO    302 = MINI_RAMBO
-#define MOTHERBOARD 301
+#define MOTHERBOARD 302
 
 /* Define Priner being used
    Orion = 1
@@ -47,7 +47,7 @@
    ERIS = 3
    DROPLIT = 4
  */
-#define PRINTER 2
+#define PRINTER 3
 
 
 #define REPETIER_VERSION "0.92.2"
@@ -77,7 +77,13 @@
 #if PRINTER == 1  // Orion Delta
 #define MOTOR_CURRENT_PWM {60, 60, 130}
 #elif PRINTER == 3  // ERIS Delta
-#define MOTOR_CURRENT_PWM {20, 20, 130}
+//****************Jetguy's Motor Swap Recommendation***********************
+//If you are swapping out the motors for higher AMP Versions releveant to the findings in this thread 
+//Comment out the original line and Uncomment the 1.2 Amp Motor Line
+// Thread : http://forum.seemecnc.com/viewtopic.php?f=99&t=10268&start=375
+// Motors used in swap : https://www.amazon.com/gp/product/B015SS3Y7O
+//#define MOTOR_CURRENT_PWM {20, 20, 130}
+#define MOTOR_CURRENT_PWM {100, 100, 130} //1.2 A motors for XYZ
 #elif PRINTER == 4  // DropLit v2
 #define MOTOR_CURRENT_PWM {0, 50, 0}  // No need for X/Y or E motor currents
 #endif
@@ -719,7 +725,12 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 
 
 #ifndef SDSUPPORT 
-#if PRINTER == 1 || PRINTER == 2
+//*****************************Eris SDCard Enable***************************************
+// Also mentioned in the thread above alongside motor swap
+// Added the Eris to the list of machines accepting an LCD Screen (with SD Enable)
+// To Disable, simply comment out the current line, and uncomment the original 1 & 2 line
+//#if PRINTER == 1 || PRINTER == 2
+#if PRINTER == 1 || PRINTER == 2 || PRINTER == 3
 #define SDSUPPORT 1
 #else
 #define SDSUPPORT 0
@@ -735,7 +746,12 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define FEATURE_MEMORY_POSITION 1
 #define FEATURE_CHECKSUM_FORCED 0
 #define FEATURE_FAN_CONTROL 1
-#if PRINTER == 1 || PRINTER == 2
+//*****************************Eris LCD Enable***************************************
+// Also mentioned in the thread above alongside motor swap
+// Added the Eris to the list of machines accepting an LCD Screen (with SD Enable)
+// To Disable, simply comment out the current line, and uncomment the original 1 & 2 line
+//#if PRINTER == 1 || PRINTER == 2 
+#if PRINTER == 1 || PRINTER == 2 || PRINTER ==3
 #define FEATURE_CONTROLLER 13
 #else
 #define FEATURE_CONTROLLER 0
